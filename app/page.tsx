@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -151,7 +152,7 @@ export default function LogoMagicPro() {
       <div className="p-4">
         <div className="max-w-6xl mx-auto mb-8 flex flex-col items-center justify-center">
           <div className="w-64 h-24 bg-primary rounded-lg flex items-center justify-center overflow-hidden">
-            <img src="/3dgifmaker93156.gif" alt="LogoMagic Pro" className="w-full h-full object-cover" />
+            <Image src="/3dgifmaker93156.gif" alt="LogoMagic Pro" width={256} height={96} className="w-full h-full object-cover" />
           </div>
         </div>
       
@@ -215,13 +216,13 @@ export default function LogoMagicPro() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Before</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/before-1.jpg" alt="Before 1" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/before-1.jpg" alt="Before 1" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">After</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/after-1.jpg" alt="After 1" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/after-1.jpg" alt="After 1" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
               </div>
@@ -238,13 +239,13 @@ export default function LogoMagicPro() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Before</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/before-2.jpg" alt="Before 2" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/before-2.jpg" alt="Before 2" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">After</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/after-2.jpg" alt="After 2" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/after-2.jpg" alt="After 2" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
               </div>
@@ -261,13 +262,13 @@ export default function LogoMagicPro() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Before</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/before-3.jpg" alt="Before 3" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/before-3.jpg" alt="Before 3" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">After</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/after-3.jpg" alt="After 3" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/after-3.jpg" alt="After 3" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
               </div>
@@ -284,13 +285,13 @@ export default function LogoMagicPro() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Before</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/before-4.jpg" alt="Before 4" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/before-4.jpg" alt="Before 4" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">After</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/after-4.jpg" alt="After 4" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/after-4.jpg" alt="After 4" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
               </div>
@@ -307,13 +308,13 @@ export default function LogoMagicPro() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Before</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/before-5.jpg" alt="Before 5" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/before-5.jpg" alt="Before 5" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">After</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src="/after-5.jpg" alt="After 5" className="w-full h-auto object-contain rounded-lg" />
+                    <Image src="/after-5.jpg" alt="After 5" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
                   </div>
                 </div>
               </div>
@@ -326,7 +327,7 @@ export default function LogoMagicPro() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {images.map((src, index) => (
               <div key={index} className="aspect-square">
-                <img src={src} alt={`Inspiration ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
+                <Image src={src} alt={`Inspiration ${index + 1}`} width={300} height={300} className="w-full h-full object-cover rounded-lg" />
               </div>
             ))}
           </div>
