@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Upload, Image as ImageIcon, Phone, Wand2, ChevronLeft, ChevronRight, User } from 'lucide-react'
+import { Upload, User, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const LoginIndicator = () => (
   <div className="w-2 h-2 bg-green-500 rounded-full absolute bottom-0 right-0"></div>
@@ -46,8 +46,6 @@ export default function LogoMagicPro() {
   const [logo, setLogo] = useState<File | null>(null)
   const [targetImage, setTargetImage] = useState<File | null>(null)
   const [logoPlacement, setLogoPlacement] = useState('')
-  const [desiredLogo, setDesiredLogo] = useState('')
-  const [result, setResult] = useState<string | null>(null)
   const [images, setImages] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [step, setStep] = useState(0)
@@ -69,23 +67,13 @@ export default function LogoMagicPro() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (logo && targetImage) {
-      setResult('Processing...')
+      // setResult('Processing...')
       await new Promise(resolve => setTimeout(resolve, 2000))
-      setResult('Logo added successfully!')
+      // setResult('Logo added successfully!')
     }
   }
 
-  const handleCreateLogo = () => {
-    // Placeholder for AI logo creation logic
-    console.log('Creating logo with AI...')
-  }
-
-  const handleCallPerson = () => {
-    // Placeholder for calling a person
-    console.log('Calling a design expert...')
-  }
-
-  const loadMoreImages = () => {
+  const loadMoreImages = useCallback(() => {
     setLoading(true)
     // Simulating an API call to load more images
     setTimeout(() => {
@@ -95,7 +83,7 @@ export default function LogoMagicPro() {
       setImages(prevImages => [...prevImages, ...newImages])
       setLoading(false)
     }, 1000)
-  }
+  }, [images]) // Add images as a dependency
 
   useEffect(() => {
     loadMoreImages()
@@ -109,16 +97,18 @@ export default function LogoMagicPro() {
       { threshold: 1 }
     )
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current)
+    const currentObserverTarget = observerTarget.current
+
+    if (currentObserverTarget) {
+      observer.observe(currentObserverTarget)
     }
 
     return () => {
-      if (observerTarget.current) {
-        observer.unobserve(observerTarget.current)
+      if (currentObserverTarget) {
+        observer.unobserve(currentObserverTarget)
       }
     }
-  }, [loading])
+  }, [loading, loadMoreImages])
 
   const nextStep = () => {
     setStep((prevStep) => Math.min(prevStep + 1, 2))
