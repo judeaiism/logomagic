@@ -8,6 +8,11 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Upload, User, ChevronLeft, ChevronRight } from 'lucide-react'
+import { db } from "../lib/firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { addDoc, collection } from "firebase/firestore";
+
+const storage = getStorage();
 
 const Popover = ({ children, content }: { children: React.ReactNode, content: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -38,6 +43,40 @@ const Popover = ({ children, content }: { children: React.ReactNode, content: Re
   )
 }
 
+// Function to save user inputs to Firestore
+const saveUserInputs = async (logo: File | null, targetImage: File | null, description: string, email: string, name: string) => {
+    try {
+        if (logo && targetImage) {
+            const logoRef = ref(storage, `logos/${logo.name}`);
+            const targetImageRef = ref(storage, `images/${targetImage.name}`);
+
+            const logoBlob = new Blob([logo]);
+            const targetImageBlob = new Blob([targetImage]);
+
+            await Promise.all([
+                uploadBytes(logoRef, logoBlob),
+                uploadBytes(targetImageRef, targetImageBlob)
+            ]);
+
+            const logoURL = await getDownloadURL(logoRef);
+            const targetImageURL = await getDownloadURL(targetImageRef);
+
+            const docRef = await addDoc(collection(db, "users"), {
+                logoURL: logoURL,
+                targetImageURL: targetImageURL,
+                description: description,
+                email: email,
+                name: name
+            });
+            console.log("Document written with ID: ", docRef.id);
+        } else {
+            console.error("Logo or target image is null.");
+        }
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+};
+
 export default function LogoMagicPro() {
   const [logo, setLogo] = useState<File | null>(null)
   const [targetImage, setTargetImage] = useState<File | null>(null)
@@ -50,6 +89,7 @@ export default function LogoMagicPro() {
   const [userEmail, setUserEmail] = useState(''); // New state for user email
   const [userName, setUserName] = useState(''); // New state for user name
   const [isUserInfoDialogOpen, setIsUserInfoDialogOpen] = useState(false); // New state for user info dialog visibility
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // New state for error messages
 
   const observerTarget = useRef(null)
 
@@ -68,10 +108,17 @@ export default function LogoMagicPro() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (logo && targetImage) {
-        setIsDialogOpen(true) // Open the dialog when the button is clicked
+    e.preventDefault();
+    setErrorMessage(null); // Reset error message on new submission attempt
+    if (!logo) {
+        setErrorMessage("Please upload your logo."); // Set error message if logo is missing
+        return;
     }
+    if (!targetImage) {
+        setErrorMessage("Please upload your target image."); // Set error message if target image is missing
+        return;
+    }
+    setIsDialogOpen(true); // Open the dialog when the button is clicked
   }
 
   // Update handleDialogConfirm to open the user info dialog
@@ -89,6 +136,8 @@ export default function LogoMagicPro() {
     }
     setIsUserInfoDialogOpen(false); // Close the user info dialog
     setIsPurchaseDialogOpen(true); // Open the purchase dialog
+    // Call saveUserInputs function with user inputs
+    saveUserInputs(logo, targetImage, logoPlacement, userEmail, userName);
   }
 
   // New function to handle dialog cancellation
@@ -218,6 +267,11 @@ export default function LogoMagicPro() {
                     </>
                   )}
                 </div>
+                {errorMessage && ( // Display error message if it exists
+                    <div className="text-red-500 text-sm">
+                        {errorMessage}
+                    </div>
+                )}
               </form>
             </CardContent>
             <CardFooter className="flex justify-between">
