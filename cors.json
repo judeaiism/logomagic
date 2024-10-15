@@ -1,7 +1,7 @@
 [
-    {
-      "origin": ["https://logomagic.vercel.app"],
-      "method": ["GET", "POST", "PUT", "DELETE"],
-      "maxAgeSeconds": 3600
-    }
-  ]
+  {
+    "origin": ["*"],
+    "method": ["GET", "POST", "PUT", "DELETE"],
+    "maxAgeSeconds": 3600
+  }
+]
