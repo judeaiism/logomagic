@@ -9,10 +9,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Upload, User, ChevronLeft, ChevronRight } from 'lucide-react'
 
-const LoginIndicator = () => (
-  <div className="w-2 h-2 bg-green-500 rounded-full absolute bottom-0 right-0"></div>
-)
-
 const Popover = ({ children, content }: { children: React.ReactNode, content: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)
   const popoverRef = useRef<HTMLDivElement>(null)
@@ -113,29 +109,27 @@ export default function LogoMagicPro() {
   }, [images]) // Add images as a dependency
 
   useEffect(() => {
-    loadMoreImages()
-
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting && !loading) {
-          loadMoreImages()
+          loadMoreImages(); // Call loadMoreImages only when the observer detects intersection
         }
       },
       { threshold: 1 }
-    )
+    );
 
-    const currentObserverTarget = observerTarget.current
+    const currentObserverTarget = observerTarget.current;
 
     if (currentObserverTarget) {
-      observer.observe(currentObserverTarget)
+      observer.observe(currentObserverTarget);
     }
 
     return () => {
       if (currentObserverTarget) {
-        observer.unobserve(currentObserverTarget)
+        observer.unobserve(currentObserverTarget);
       }
-    }
-  }, [loading, loadMoreImages])
+    };
+  }, [loading]); // Only depend on loading, not loadMoreImages
 
   const nextStep = () => {
     setStep((prevStep) => Math.min(prevStep + 1, 2))
@@ -168,29 +162,17 @@ export default function LogoMagicPro() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-2 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">lll. LOGOMAGIC PRO</h1>
-          <Popover
-            content={
-              <div className="p-2">
-                <div className="text-sm font-medium">Logged in as User</div>
-                <Button variant="ghost" className="w-full mt-2">Logout</Button>
-              </div>
-            }
-          >
-            <Button variant="ghost" className="relative">
-              <User className="h-6 w-6" />
-              <LoginIndicator />
-            </Button>
-          </Popover>
-        </div>
-      </header>
-
       <div className="p-4">
         <div className="max-w-6xl mx-auto mb-8 flex flex-col items-center justify-center">
           <div className="w-64 h-24 bg-primary rounded-lg flex items-center justify-center overflow-hidden">
-            <Image src="/3dgifmaker93156.gif" alt="LogoMagic Pro" width={256} height={96} className="w-full h-full object-cover" />
+            <Image
+              src="/3dgifmaker93156.gif"
+              alt="LogoMagic Pro"
+              width={256}
+              height={96}
+              className="w-full h-full object-cover"
+              priority // Added priority property
+            />
           </div>
         </div>
       
@@ -253,75 +235,6 @@ export default function LogoMagicPro() {
         </div>
 
         <div className="mt-8 max-w-6xl mx-auto space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Before and After Comparison</CardTitle>
-              <CardDescription>See the difference your logo makes</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'red' }}>Before</h3>
-                  <div className="aspect-w-16 aspect-h-9">
-                    <Image src="/before-1.jpg" alt="Before 1" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'green' }}>After</h3>
-                  <div className="aspect-w-16 aspect-h-9">
-                    <Image src="/after-1.jpg" alt="After 1" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Before and After Comparison</CardTitle>
-              <CardDescription>See the difference your logo makes</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'red' }}>Before</h3>
-                  <div className="aspect-w-16 aspect-h-9">
-                    <Image src="/before-2.jpg" alt="Before 2" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'green' }}>After</h3>
-                  <div className="aspect-w-16 aspect-h-9">
-                    <Image src="/after-2.jpg" alt="After 2" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Before and After Comparison</CardTitle>
-              <CardDescription>See the difference your logo makes</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'red' }}>Before</h3>
-                  <div className="aspect-w-16 aspect-h-9">
-                    <Image src="/before-3.jpg" alt="Before 3" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'green' }}>After</h3>
-                  <div className="aspect-w-16 aspect-h-9">
-                    <Image src="/after-3.jpg" alt="After 3" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
           <Card>
             <CardHeader>
               <CardTitle>Before and After Comparison</CardTitle>
