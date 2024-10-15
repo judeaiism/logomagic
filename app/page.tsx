@@ -7,41 +7,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Upload, User, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Upload, ChevronLeft } from 'lucide-react'
 import { db } from "../lib/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 
 const storage = getStorage();
-
-const Popover = ({ children, content }: { children: React.ReactNode, content: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const popoverRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
-
-  return (
-    <div className="relative" ref={popoverRef}>
-      <div onClick={() => setIsOpen(!isOpen)}>{children}</div>
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1">{content}</div>
-        </div>
-      )}
-    </div>
-  )
-}
 
 // Function to save user inputs to Firestore
 const saveUserInputs = async (logo: File | null, targetImage: File | null, description: string, email: string, name: string) => {
@@ -140,11 +111,6 @@ export default function LogoMagicPro() {
     saveUserInputs(logo, targetImage, logoPlacement, userEmail, userName);
   }
 
-  // New function to handle dialog cancellation
-  const handleDialogCancel = () => {
-    setIsDialogOpen(false) // Close the dialog
-  }
-
   const loadMoreImages = useCallback(() => {
     setLoading(true)
     // Simulating an API call to load more images
@@ -178,7 +144,7 @@ export default function LogoMagicPro() {
         observer.unobserve(currentObserverTarget);
       }
     };
-  }, [loading]); // Only depend on loading, not loadMoreImages
+  }, [loading, loadMoreImages]); // Add loadMoreImages to dependencies
 
   const nextStep = () => {
     setStep((prevStep) => Math.min(prevStep + 1, 2))
@@ -207,7 +173,7 @@ export default function LogoMagicPro() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, []);
+  }, [loadMoreImages]); // Add loadMoreImages to dependencies
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200">
