@@ -13,6 +13,9 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
+// Log the entire firebaseConfig for debugging
+console.log("Firebase Config:", firebaseConfig);
+
 // Log the storage bucket for debugging
 console.log("Storage Bucket:", process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET);
 
