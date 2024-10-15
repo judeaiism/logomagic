@@ -235,6 +235,79 @@ export default function LogoMagicPro() {
         </div>
 
         <div className="mt-8 max-w-6xl mx-auto space-y-8">
+          {/* Card for Before and After Comparison 1 */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Before and After Comparison</CardTitle>
+              <CardDescription>See the difference your logo makes</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'red' }}>Before</h3>
+                  <div className="aspect-w-16 aspect-h-9">
+                    <Image src="/before-1.jpg" alt="Before 1" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'green' }}>After</h3>
+                  <div className="aspect-w-16 aspect-h-9">
+                    <Image src="/after-1.jpg" alt="After 1" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Card for Before and After Comparison 2 */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Before and After Comparison</CardTitle>
+              <CardDescription>See the difference your logo makes</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'red' }}>Before</h3>
+                  <div className="aspect-w-16 aspect-h-9">
+                    <Image src="/before-2.jpg" alt="Before 2" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'green' }}>After</h3>
+                  <div className="aspect-w-16 aspect-h-9">
+                    <Image src="/after-2.jpg" alt="After 2" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Card for Before and After Comparison 3 */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Before and After Comparison</CardTitle>
+              <CardDescription>See the difference your logo makes</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'red' }}>Before</h3>
+                  <div className="aspect-w-16 aspect-h-9">
+                    <Image src="/before-3.jpg" alt="Before 3" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: 'green' }}>After</h3>
+                  <div className="aspect-w-16 aspect-h-9">
+                    <Image src="/after-3.jpg" alt="After 3" width={640} height={360} className="w-full h-auto object-contain rounded-lg" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Card for Before and After Comparison 4 */}
           <Card>
             <CardHeader>
               <CardTitle>Before and After Comparison</CardTitle>
@@ -258,6 +331,7 @@ export default function LogoMagicPro() {
             </CardContent>
           </Card>
 
+          {/* Card for Before and After Comparison 5 */}
           <Card>
             <CardHeader>
               <CardTitle>Before and After Comparison</CardTitle>
