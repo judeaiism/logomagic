@@ -201,7 +201,7 @@ export default function LogoMagicPro() {
                   {step === 0 && (
                     <div className="grid w-full items-center gap-1.5">
                       <Label htmlFor="logo">Upload Your Logo</Label>
-                      <Input id="logo" type="file" accept="image/*,video/*,.gif" onChange={handleLogoUpload} />
+                      <Input id="logo" type="file" accept="image/*" onChange={handleLogoUpload} />
                     </div>
                   )}
                 </div>
@@ -209,7 +209,7 @@ export default function LogoMagicPro() {
                   {step === 1 && (
                     <div className="grid w-full items-center gap-1.5">
                       <Label htmlFor="target-image">Upload Target Image</Label>
-                      <Input id="target-image" type="file" onChange={handleTargetImageUpload} />
+                      <Input id="target-image" type="file" accept="image/*" onChange={handleTargetImageUpload} />
                     </div>
                   )}
                 </div>
