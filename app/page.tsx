@@ -430,9 +430,6 @@ export default function LogoMagicPro() {
         <div id="purchase-dialog" className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-4 rounded shadow-lg">
             <h2 className="text-lg font-bold">Purchase Credits</h2>
-            <div className="flex justify-center my-4">
-              <Image src="/paypal.png" alt="PayPal" width={200} height={100} />
-            </div>
             <Button 
               onClick={() => window.open('https://www.paypal.com/invoice/p/#INV2-FRRR-L3HH-M6YY-3UTP', '_blank')}
               className="w-full mt-4"
